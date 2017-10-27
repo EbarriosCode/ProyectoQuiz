@@ -8,9 +8,9 @@
 
 var config = {
     host : 'localhost',
-    user : 'u313460887_root',
-    password : '123456789',
-    database : 'u313460887_node',
+    user : 'root',
+    password : 'quiz',
+    database : 'proyectonode',
     port: 3306
 };
 
