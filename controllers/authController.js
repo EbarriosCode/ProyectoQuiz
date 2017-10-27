@@ -52,6 +52,7 @@ class Auth{
         };
         //console.log(usuario);
         req.session.usuarioCreaJuegos = usuario.nombres+' '+usuario.apellidos;
+        req.session.emailUserAdmin = usuario.correo;
         inst.CrearCuentaModel(usuario,(error,results)=>{
             if(!error)
             {
