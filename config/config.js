@@ -10,7 +10,7 @@ var config = {
     host : 'localhost',
     user : 'root',
     password : 'quiz',
-    database : 'ProyectoNode',
+    database : 'proyectonode',
     port: 3306
 };
 
