@@ -16,7 +16,7 @@ html
     script(src="/javascripts/exporting.js")
 
     div(id="containerBar" style="height: 400px")
-    div(id="containerPie")                                                                              
+    div(id="containerPie" style="height: 400px")                                                                              
     //Nav tabs
     //ul(class="nav nav-tabs nav-justified info" role="tablist")
       li(class="nav-item")
@@ -42,6 +42,10 @@ html
     script.
       
       var resultado;
+
+      $("#btn-resultado").click(function(){        
+          getResultadoAjax();            
+      });
       function getResultadoAjax()
       {
         $.ajax
@@ -76,8 +80,7 @@ html
                 }                
             }
         );
-      }
-      getResultadoAjax();            
+      }      
 
       function PintarGraficoPie(series)
       {
