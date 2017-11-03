@@ -5,10 +5,10 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     title= title
-    //link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/styleChart.css')
-    //script(src='/javascripts/jquery.js')
-    //script(src='/javascripts/bootstrap.js')
+    script(src='/javascripts/jquery.js')
+    script(src='/javascripts/bootstrap.js')
   body
 
     script(src="/javascripts/highcharts.js")
@@ -43,8 +43,10 @@ html
       
       var resultado;
 
+      getResultadoAjax();            
+
       $("#btn-resultado").click(function(){        
-          getResultadoAjax();            
+          //getResultadoAjax();            
       });
       function getResultadoAjax()
       {
@@ -52,9 +54,9 @@ html
         (
             {
                 url : "/ResultadoFinalJuego",
-                type : "GET",
+                type : "POST",
                 contentType: "application/json; charset=utf-8",
-                //data: "{}",
+                data: "{}",
                 dataType: "json",
                 success: function(Result){
                   //Result = Result.d;

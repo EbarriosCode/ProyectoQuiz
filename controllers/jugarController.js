@@ -43,6 +43,10 @@ class Jugar{
         });
     }
 
+    ResultadoFinalVista(req,res,next){
+        res.render('graficasResultados/resultadosHighCharts',{title : "Resultado-View"});
+    }
+
     ResultadoFinalJuego(req,res,next)
     {
         //verificar que exista el idJuego en session

@@ -27,10 +27,10 @@ block content
                 button(class=["btn","btn-raised","btn-warning"], id="btn-terminar") Terminar Juego        
                   i(class="material-icons") highlight_off                  
 
-                //a(class=["btn","btn-raised","btn-info"], href="/resultados") Ver Resultados        
+                a(class=["btn","btn-raised","btn-info"], href="/ResultadoFinalVista") Ver Resultados
                   i(class="material-icons") pie_chart        
                 
-                button(type="button",class=["btn","btn-raised","btn-info"], data-toggle="modal", data-target="#ResultModal", id="btn-resultado") Resultados        
+                //button(type="button",class=["btn","btn-raised","btn-info"], data-toggle="modal", data-target="#ResultModal", id="btn-resultado") Resultados        
                   i(class="material-icons") pie_chart        
 
         div(class="col-md-8")
@@ -126,7 +126,7 @@ block content
             span(aria-hidden="true") &times;
           
         div(class="modal-body")                              
-          include ../graficasResultados/resultadosHighCharts
+          //include ../graficasResultados/resultadosHighCharts
         
         div(class="modal-footer")          
           button(type="button" class="btn btn-info" data-dismiss="modal") Cerrar

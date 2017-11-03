@@ -55,7 +55,8 @@ router.get('/iniciarTimerAjax/:dato',jugar.IniciarTimerAjax);
 router.get('/iniciarJuego/:id',jugar.IniciarJuego);
 
 //Ruta para obtener el resultado de un juego AJAX
-router.get('/ResultadoFinalJuego',jugar.ResultadoFinalJuego);
+router.post('/ResultadoFinalJuego',jugar.ResultadoFinalJuego);
+router.get('/ResultadoFinalVista',jugar.ResultadoFinalVista);
 
 // ruta error | 404 si no hay usuario con session
 const notFound = require('../controllers/notFound404Controller');
