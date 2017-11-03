@@ -13,7 +13,7 @@ html
     script(src="/javascripts/highcharts-3d.js")
     script(src="/javascripts/exporting.js")
   body    
-
+    h1(class="text-center") No funciona
     div(id="containerBar" style="height: 400px")
     div(id="containerPie" style="height: 400px")                                                                              
     //Nav tabs
@@ -73,7 +73,7 @@ html
                   //Aqui va la funcion que pinta el grafico
                   //console.log(data);
                   //console.log(categoriasBarChart);
-                  PintarGraficoPie(data);
+                  //PintarGraficoPie(data);
                   PintarGraficoBar(data,categoriasBarChart);
                 },
                 error: function(Result){
