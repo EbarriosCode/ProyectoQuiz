@@ -45,6 +45,7 @@ router.post('/crearPregunta',inst.nuevaPreguntaPost);
 // ruta mvc para jugar
 const juego = require('../controllers/jugarController');
 var jugar = new juego();
+var jugar2 = new juego();
 
 router.get('/jugar/:id',jugar.Index);
 
@@ -55,8 +56,8 @@ router.get('/iniciarTimerAjax/:dato',jugar.IniciarTimerAjax);
 router.get('/iniciarJuego/:id',jugar.IniciarJuego);
 
 //Ruta para obtener el resultado de un juego AJAX
-router.post('/ResultadoFinalJuego',jugar.ResultadoFinalJuego);
-router.get('/ResultadoFinalVista',jugar.ResultadoFinalVista);
+router.post('/ResultadoFinalJuego',jugar2.ResultadoFinalJuego);
+router.get('/ResultadoFinalVista',jugar2.ResultadoFinalVista);
 
 // ruta error | 404 si no hay usuario con session
 const notFound = require('../controllers/notFound404Controller');
