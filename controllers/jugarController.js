@@ -54,6 +54,30 @@ class Jugar{
             }
         });
     }
+
+    IniciarTimerAjax(req,res,next){
+        console.log(req.params.dato);
+
+        var counter = 0;        
+        var interval = 1000;
+  
+        function convertSeconds(s)
+        {
+          var min = Math.floor(s / 60);
+          var sec = s % 60;
+          return min+"m : "+sec+"s";
+        }
+  
+        //console.log(convertSeconds(counter));
+  
+        function timeIt(){
+          counter++;
+          console.log(convertSeconds(counter));          
+          res.send(counter.toString());
+        }
+  
+        setInterval(timeIt,interval);        
+    }
 }
 
 module.exports = Jugar;

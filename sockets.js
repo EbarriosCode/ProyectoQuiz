@@ -42,7 +42,41 @@ exports.handle = function(server, session)
         //Evento para cuando el administrador inicia el juego
         socket.on('empezar juego',function(empezar){
             //console.log('EMPEZAR EL JUEGO -> '+empezar);
-            io.sockets.emit('empezar',empezar);
+            io.sockets.emit('empezar',empezar);            
+        });
+
+        // Crear el timer en el servidor a partir de un evento recibido desde el cliente
+        socket.on('timer',function(time,terminado){
+            //console.log("Timer recibido del cliente",);
+            var timerInterval;
+            var segundosSetInterval = 1000;            
+            var terminado = true;
+            function timePlus()
+            {
+                time++;
+                console.log(time);
+                io.sockets.emit('timer',time,terminado);                            
+
+                socket.on('terminar time',function(terminar){                                                                                        
+                    //setInterval(timeClear,segundosSetInterval);                        
+                    //console.log("Debe terminar -> VALOR DE TIME: "+time);
+                    //clearInterval(timerInterval);
+                    //clearInterval(timerInterval);
+                    //var terminarTime = 0;
+                    //io.sockets.emit('terminar client',terminarTime);                    
+                    stopTimer();
+                    terminado = false;
+                    io.sockets.emit('timer terminado final',terminado);                    
+                });
+            
+            }                        
+
+            timerInterval = setInterval(timePlus,segundosSetInterval,'Node JS');                        
+
+            function stopTimer()
+            {
+                clearInterval(timerInterval);
+            }
         });
     });
 }

@@ -1,31 +1,43 @@
 extends ../template/layout
 block content
-
+  style.
+    .margen{
+      margin-right: 50%;
+    }
   //Id del juego oculto
   input(type="hidden",id="idJuego",value=idJuego)
   
   div(class=["container-fluid"])        
     div(class="jumbotron")      
-      h1(class="text-center") PIN PARA PARTICIPANTES 
+      h1(class="text-center") PIN PARA PARTICIPANTES       
         strong(class="text-warning")=idJuego
+        h4(id="timer" class="text-center") 
       div(class='row')        
 
-        div(class="col-md-6 col-sm-6 col-xs-12")
-          button(class=["btn","btn-raised","btn-success"], id="btn-empezar") Iniciar Juego        
-            i(class="material-icons") play_circle_outline
-          
-        div(class="col-md-6 col-sm-6 col-xs-12")
-          //button(class=["btn","btn-raised","btn-info","pull-right"],data-toggle="modal", data-target="#ResultModal") Ver Resultados        
-            i(class="material-icons") pie_chart        
-          a(class=["btn","btn-raised","btn-info","pull-right"], href="/resultados") Ver Resultados        
-            i(class="material-icons") pie_chart        
+        div(class="col-md-4")
+          div(class="panel panel-default")
+            div(class="panel-heading") Opciones
+            div(class="panel-body margen")
 
-      div(class="row")
-        div(class="col-md-12")
+              .btn-group-vertical
+
+                button(class=["btn","btn-raised","btn-success"], id="btn-empezar") Iniciar Juego        
+                  i(class="material-icons") play_circle_outline
+
+                button(class=["btn","btn-raised","btn-warning"], id="btn-terminar") Terminar Juego        
+                  i(class="material-icons") highlight_off                  
+
+                //a(class=["btn","btn-raised","btn-info"], href="/resultados") Ver Resultados        
+                  i(class="material-icons") pie_chart        
+                
+                button(type="button",class=["btn","btn-raised","btn-info"], data-toggle="modal", data-target="#ResultModal") Resultados        
+                  i(class="material-icons") pie_chart        
+
+        div(class="col-md-8")
           h2(class="text-center") Participantes en Línea  
             strong(class="text-center text-danger" id="countUsers")           
         
-        div(class="col-md-6 col-md-offset-3")
+          //div(class="col-md-6 col-md-offset-3")
           ul(id="usuarios")            
               
   //if(sinDatos == undefined)
@@ -109,19 +121,23 @@ block content
     div(class="modal-dialog" role="document")
       div(class="modal-content")
         div(class="modal-header")
-          h1(class="modal-title text-center") Resultado
+          //h1(class="modal-title text-center") Resultado
           button(type="button" class="close" data-dismiss="modal" aria-label="Close")
             span(aria-hidden="true") &times;
           
         div(class="modal-body")                              
-          include ../graficasResultados/resultados
+          include ../graficasResultados/resultadosHighCharts
         
         div(class="modal-footer")          
           button(type="button" class="btn btn-info" data-dismiss="modal") Cerrar
 
+  //script(src="/javascripts/timerGame.js")
   script(src="/socket.io/socket.io.js")
   //Script de sockets
   script.
+    //VARIABLE QUE ALMACENA EL TIMER Y EL RESULTADO DEL TIMER DEBE SER GLOBAL
+    var timerIntervalData;
+
     var socket = io();
     // Socket real recibir el array de usuarios conectados
     socket.on('listaUsuarios',function(usuariosConectados){
@@ -136,15 +152,41 @@ block content
     //Socket evento de contador de conexiones
     socket.on('conectados',function(contadorConexiones){
       $("#countUsers").html(contadorConexiones);
-    });
+    }); 
 
     $("#btn-empezar").click(function(){      
       var empezar = 1;
       socket.emit('empezar juego',empezar);
       //$("#btn-empezar").attr("disabled", true);
       IniciarJuego($("#idJuego").val());
+      //iniciarTimer();
+      //iniciarTimerAjax();
+      socket.emit('timer',0,true);
     });
 
+    socket.on('timer',function(time,terminado){
+      //console.log(time);          
+      iniciarTimer(time,terminado);            
+
+      if(!terminado)
+        terminarTimer();
+    });
+
+    $("#btn-terminar").click(function(){
+      var terminar = 0;
+      socket.emit('terminar time',terminar);      
+
+      //terminarTimer();
+    });
+
+    socket.on('terminar client',function(terminarTime){
+      //console.log('Terminar time ->'+terminarTime);
+      //$("#timer").html("Juego Terminado");
+    });
+
+    socket.on('timer terminado final',function(terminado){      
+      //stopTimer();
+    });
     //Evento ajax para actualizar a iniciado el juego en la tabla juegos
     function IniciarJuego(idJuego)
     {      
@@ -155,10 +197,42 @@ block content
               type : "GET"
           }
       ).done(function(resp){          
-          console.log(resp[0][0].juegoIniciado);
+          //console.log(resp[0][0].juegoIniciado);
 
-      });
+      });      
     }
+
+    function terminarTimer(){
+      window.clearInterval(timerIntervalData);
+    }
+
+    function iniciarTimer(timer,terminado)
+    {
+      var counter = timer;
+      var timer = $("#timer");
+      var interval = 1000;
+
+      function convertSeconds(s)
+      {
+        var min = Math.floor(s / 60);
+        var sec = s % 60;
+
+        if(min == 5)
+        {
+          //alert("debe terminar");
+
+        }
+        return min+"m : "+sec+"s";
+      }
+
+      timer.html(convertSeconds(counter));
+
+      function timeIt(){
+        counter++;
+        timer.html(convertSeconds(counter));
+      }      
+      timerIntervalData = setInterval(timeIt,interval);      
+    }       
        
     //Recibir el mensaje del servidor
     /*socket.on('new jugador',function(jugador,carne,conexiones){

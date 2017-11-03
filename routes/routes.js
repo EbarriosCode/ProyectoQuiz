@@ -48,11 +48,14 @@ var jugar = new juego();
 
 router.get('/jugar/:id',jugar.Index);
 
+// Ruta iniciar timer con ajax
+router.get('/iniciarTimerAjax/:dato',jugar.IniciarTimerAjax);
+
 //Ruta para actualizar el campo juegoIniciado con ajax en la tabla juegos
 router.get('/iniciarJuego/:id',jugar.IniciarJuego);
 
 //Ruta para obtener el resultado de un juego AJAX
-router.get('/ResultadoFinalJuego',jugar.ResultadoFinalJuego);
+router.post('/ResultadoFinalJuego',jugar.ResultadoFinalJuego);
 
 // ruta error | 404 si no hay usuario con session
 const notFound = require('../controllers/notFound404Controller');
@@ -68,6 +71,9 @@ var result = new Resultados();
 
 router.get('/resultados',result.getResultados);
 
+//Ruta para obtener el resultado de un juego AJAX con HighCharts
+router.get('/ResultadosFinalChart',result.getResultadosHighCharts);
+
 // ruta para el chat entre jugadores y admin
 const Chat = require('../controllers/chatController');
 var chat = new Chat();
@@ -75,7 +81,6 @@ var chat = new Chat();
 router.get('/Chat',chat.getViewChat);
 // ruta de prueba
 router.get('/pruebaPreguntas',inst.getPreguntas);
-
 
 
 //Test en heroku
