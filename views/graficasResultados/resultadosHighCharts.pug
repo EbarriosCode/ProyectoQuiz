@@ -44,8 +44,7 @@ html
       var resultado;
 
       $("#btn-resultado").click(function(){        
-          //getResultadoAjax();            
-            PintarGraficoPie();
+          getResultadoAjax();            
       });
       function getResultadoAjax()
       {
@@ -53,9 +52,9 @@ html
         (
             {
                 url : "/ResultadoFinalJuego",
-                type : "POST",
+                type : "GET",
                 contentType: "application/json; charset=utf-8",
-                data: "{}",
+                //data: "{}",
                 dataType: "json",
                 success: function(Result){
                   //Result = Result.d;
@@ -83,7 +82,7 @@ html
         );
       }      
 
-      function PintarGraficoPie(/*series*/)
+      function PintarGraficoPie(series)
       {
           Highcharts.chart('containerPie', {
             chart: {
@@ -108,19 +107,7 @@ html
             //series: jsonFinal
             series: [{
                 name: 'Total de Respuestas Correctas',                            
-                //data: series                   
-                data: [
-            ['Bananas', 8],
-            ['Kiwi', 3],
-            ['Mixed nuts', 1],
-            ['Oranges', 6],
-            ['Apples', 8],
-            ['Pears', 4],
-            ['Clementines', 4],
-            ['Reddish (bag)', 1],
-            ['Grapes (bunch)', 1]
-        ]
-                    
+                data: series                   
             }]
         });
       }
