@@ -12,12 +12,18 @@ block content
   input(type="hidden",id="sessionUsuario",value=usuario)    
 
   if(terminado == undefined)
+    div(class="container-fluid")
+      div(class="row")
+        h1(class="col-md-12 text-right") Pregunta 
+          strong()=noPreguntaActual          
+          |  De 
+          strong()=numeroTotalPreguntas
     //Empezar el juego campo oculto
     input(type="hidden",id="empezar",value=data[7][0].juegoIniciado)  
 
     div(id="contenedor-preguntas")
       div(class="container-fluid")
-        h1(class="text-center",id="titulo") Esperando a que el Administrador inicie el Juego
+        h1(class="text-center",id="titulo") Esperando a que inicie el Juego
 
         div(id="resultado")
         if(correct == undefined)
@@ -37,6 +43,7 @@ block content
               
         div(class='jumbotron')
           div(class='preguntas')
+            h4(id="timer" class="text-center") 
             p= data[0][0].pregunta
                 
           div(class='respuestas')
@@ -118,6 +125,9 @@ block content
         setTimeout(function(){
           $.LoadingOverlay("hide");
         }, segundos);
+
+        $("#titulo").html("Juego Iniciado!");
+        $("#titulo").css("color","#fff");
       }      
     });    
 
@@ -128,7 +138,8 @@ block content
           $.LoadingOverlay("hide");
         }, 0);
 
-        $("#titulo").html("Empieza!!!!");
+        $("#titulo").html("Juego Iniciado!");
+        $("#titulo").css("color","#fff");
       }      
     }
     function getRadioButtonSelectedValue(NameRadio)
@@ -216,6 +227,55 @@ block content
         if (tecla = 116) {return false;}    
       }
     }
+  
+  script(src="/socket.io/socket.io.js")
+  //Script de sockets
+  script.
+    //VARIABLE QUE ALMACENA EL TIMER Y EL RESULTADO DEL TIMER DEBE SER GLOBAL
+    var timerIntervalData;
+    socket.on('timer',function(time,terminado){
+      //console.log(time);          
+      iniciarTimer(time,terminado);            
+
+      if(!terminado)
+        terminarTimer();
+    });
+
+    socket.on('timer terminado final',function(terminado){      
+      //stopTimer();
+    });
+
+    function terminarTimer(){
+      window.clearInterval(timerIntervalData);
+    }
+
+    function iniciarTimer(timer,terminado)
+    {
+      var counter = timer;
+      var timer = $("#timer");
+      var interval = 1000;
+
+      function convertSeconds(s)
+      {
+        var min = Math.floor(s / 60);
+        var sec = s % 60;
+
+        if(min == 5)
+        {
+          //alert("debe terminar");
+
+        }
+        return min+"m : "+sec+"s";
+      }
+
+      timer.html(convertSeconds(counter));
+
+      function timeIt(){
+        counter++;
+        timer.html(convertSeconds(counter));
+      }      
+      timerIntervalData = setInterval(timeIt,interval);      
+    }       
       
           
  

@@ -81,7 +81,7 @@ class Index{
                 else{
                     correcta = data[4][0].respuesta == respuesta ? true : false;
                 }
-                res.render('juego/juegoEnEspera',{title:'Juego',data : data, correct : correcta });
+                res.render('juego/juegoEnEspera',{title:'Juego',data : data, correct : correcta , noPregunta : indiceGet});
             }
         });
         
@@ -109,13 +109,15 @@ class Index{
                     //res.send(data);
                     //res.send(data[0].length.toString());                
                     let respuestaCorrecta = data[4][0].respuesta.toLowerCase();                      
+                    let totalPreguntas = data[3][0].numPreguntas;
+                    console.log("NUMERO DE PREGUNTAS "+totalPreguntas);
                     //let juegoIniciado = data[7][0].juegoIniciado;
 
                     if(data[0].length > 0){                                    
                         console.log("RESPUESTA CORRECTA ->"+respuestaCorrecta);                
                         //console.log("CANTIDAD CORRECTAS -> "+data[6][0].cantCorrectas+" CANTIDAD INCORRECTAS -> "+data[6][0].cantIncorrectas);
                                                 
-                        res.render('juego/juegoEnEspera',{data : data, idPreguntaSiguiente : preguntaSiguiente , correcta : respuestaCorrecta, usuario : req.session.nombre});
+                        res.render('juego/juegoEnEspera',{data : data, idPreguntaSiguiente : preguntaSiguiente , correcta : respuestaCorrecta, noPreguntaActual : req.params.idPregunta, numeroTotalPreguntas : totalPreguntas, usuario : req.session.nombre});
                     }                    
 
                     else{
