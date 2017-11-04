@@ -5,10 +5,10 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     title= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    link(rel='stylesheet', href='/stylesheets/styleChart.css')
-    script(src='/javascripts/jquery.js')
-    script(src='/javascripts/bootstrap.js')
+    //- link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    //- link(rel='stylesheet', href='/stylesheets/styleChart.css')
+    //- script(src='/javascripts/jquery.js')
+    //- script(src='/javascripts/bootstrap.js')
     script(src="/javascripts/highcharts.js")
     script(src="/javascripts/highcharts-3d.js")
     script(src="/javascripts/exporting.js")
@@ -42,10 +42,10 @@ html
       
       var resultado;
 
-      getResultadoAjax();            
+      //getResultadoAjax();            
 
       $("#btn-resultado").click(function(){        
-          //getResultadoAjax();            
+          getResultadoAjax();            
       });
 
       function getResultadoAjax()
@@ -62,7 +62,7 @@ html
                   //Result = Result.d;
                   var data = [];
                   var categoriasBarChart = [];
-                  console.log(Result);
+                  //console.log(Result);
                   //console.log(Result[0][0].nombre);
                   for(var i in Result[0])
                   {
