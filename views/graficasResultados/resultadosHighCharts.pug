@@ -96,8 +96,7 @@ html
                     }
                     alert(msg);
                 } */
-            }
-            ).done(function(Result){
+            }).done(function(Result){
                 var data = [];
                 var categoriasBarChart = [];
                 //console.log(Result[0][0].nombre);
@@ -116,6 +115,8 @@ html
                 PintarGraficoBar(data,categoriasBarChart);
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 // handle error
+                console.log("Status: "+textStatus);
+                console.log("Thrown: "+errorThrown);
                 var msg = '';
                     if (jqXHR.status === 0) {
                         msg = 'Not connect.\n Verify Network.';
