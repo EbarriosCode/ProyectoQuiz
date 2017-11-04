@@ -55,8 +55,8 @@ html
             {
                 url : "/ResultadoFinalJuego",
                 type : "POST",
-                contentType: "application/json; charset=utf-8",
-                data: "{}",
+                //contentType: "application/json; charset=utf-8",
+                //data: "{}",
                 dataType: "json",
                 /*success: function(Result){
                   //Result = Result.d;
@@ -97,24 +97,43 @@ html
                     alert(msg);
                 } */
             }
-        ).done(function(Result){
-            var data = [];
-            var categoriasBarChart = [];
-            //console.log(Result[0][0].nombre);
-            for(var i in Result[0])
-            {
-                var serie = new Array(Result[0][i].nombre, Result[0][i].sumaCorrectas);
-                data.push(serie);
+            ).done(function(Result){
+                var data = [];
+                var categoriasBarChart = [];
+                //console.log(Result[0][0].nombre);
+                for(var i in Result[0])
+                {
+                    var serie = new Array(Result[0][i].nombre, Result[0][i].sumaCorrectas);
+                    data.push(serie);
 
-                var nombres = new Array(Result[0][i].nombre);
-                categoriasBarChart.push(nombres);
-            }
-            //Aqui va la funcion que pinta el grafico
-            //console.log(data);
-            //console.log(categoriasBarChart);
-            PintarGraficoPie(data);
-            PintarGraficoBar(data,categoriasBarChart);
-        });
+                    var nombres = new Array(Result[0][i].nombre);
+                    categoriasBarChart.push(nombres);
+                }
+                //Aqui va la funcion que pinta el grafico
+                //console.log(data);
+                //console.log(categoriasBarChart);
+                PintarGraficoPie(data);
+                PintarGraficoBar(data,categoriasBarChart);
+            }).error(function (jqXHR, textStatus, errorThrown) {
+                // handle error
+                var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    alert(msg);
+            });
       }     
       /*function getResultadoAjax()
       {
