@@ -58,10 +58,11 @@ html
                 contentType: "application/json",
                 //data: "{}",
                 //dataType: "json",
-                /*success: function(Result){
+                success: function(Result){
                   //Result = Result.d;
                   var data = [];
                   var categoriasBarChart = [];
+                  console.log(Result);
                   //console.log(Result[0][0].nombre);
                   for(var i in Result[0])
                   {
@@ -95,8 +96,11 @@ html
                         msg = 'Uncaught Error.\n' + jqXHR.responseText;
                     }
                     alert(msg);
-                } */
-            }).done(function(Result){                
+                } 
+            }
+        );
+            /*
+            ).done(function(Result){                
                 var data = [];
                 var categoriasBarChart = [];
                 console.log(Result);
@@ -118,25 +122,8 @@ html
                 // handle error
                 console.log("jqXHR: "+jqXHR);
                 console.log("Status: "+textStatus);
-                console.log("Thrown: "+errorThrown);
-                /*var msg = '';
-                    if (jqXHR.status === 0) {
-                        msg = 'Not connect.\n Verify Network.';
-                    } else if (jqXHR.status == 404) {
-                        msg = 'Requested page not found. [404]';
-                    } else if (jqXHR.status == 500) {
-                        msg = 'Internal Server Error [500].';
-                    } else if (exception === 'parsererror') {
-                        msg = 'Requested JSON parse failed.';
-                    } else if (exception === 'timeout') {
-                        msg = 'Time out error.';
-                    } else if (exception === 'abort') {
-                        msg = 'Ajax request aborted.';
-                    } else {
-                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                    }
-                    alert(msg);*/
-            });
+                console.log("Thrown: "+errorThrown);                
+            });*/
       }     
       /*function getResultadoAjax()
       {
