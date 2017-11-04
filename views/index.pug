@@ -59,6 +59,7 @@ html(lang='en')
     script(src='/javascripts/material.js')
     script(src='/javascripts/ripples.js')
     script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/navigator.js")
     script.
       $.material.init();
     
@@ -69,7 +70,7 @@ html(lang='en')
       //var yo = require('yo-yo');      
       var socket = io();
 
-      var jugadorClient;
+      var jugadorClient;     
 
       /*$("#btn-entrarJuego").click(function(){
         //guardar el nombre del jugador en localStorage
