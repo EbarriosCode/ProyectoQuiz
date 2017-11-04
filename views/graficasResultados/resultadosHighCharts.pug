@@ -114,7 +114,7 @@ html
                 //console.log(categoriasBarChart);
                 PintarGraficoPie(data);
                 PintarGraficoBar(data,categoriasBarChart);
-            }).error(function (jqXHR, textStatus, errorThrown) {
+            }).fail(function (jqXHR, textStatus, errorThrown) {
                 // handle error
                 var msg = '';
                     if (jqXHR.status === 0) {
