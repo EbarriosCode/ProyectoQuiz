@@ -96,10 +96,10 @@ html
                     }
                     alert(msg);
                 } */
-            }).done(function(Result){
+            }).done(function(Result){                
                 var data = [];
                 var categoriasBarChart = [];
-                //console.log(Result[0][0].nombre);
+                console.log(Result[0][0].nombre);
                 for(var i in Result[0])
                 {
                     var serie = new Array(Result[0][i].nombre, Result[0][i].sumaCorrectas);
