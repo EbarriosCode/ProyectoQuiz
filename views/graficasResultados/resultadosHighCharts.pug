@@ -55,7 +55,7 @@ html
             {
                 url : "/ResultadoFinalJuego",
                 type : "POST",
-                //contentType: "application/json; charset=utf-8",
+                contentType: "application/json",
                 //data: "{}",
                 dataType: "json",
                 /*success: function(Result){
@@ -115,9 +115,10 @@ html
                 PintarGraficoBar(data,categoriasBarChart);
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 // handle error
+                console.log("jqXHR: "+jqXHR);
                 console.log("Status: "+textStatus);
                 console.log("Thrown: "+errorThrown);
-                var msg = '';
+                /*var msg = '';
                     if (jqXHR.status === 0) {
                         msg = 'Not connect.\n Verify Network.';
                     } else if (jqXHR.status == 404) {
@@ -133,7 +134,7 @@ html
                     } else {
                         msg = 'Uncaught Error.\n' + jqXHR.responseText;
                     }
-                    alert(msg);
+                    alert(msg);*/
             });
       }     
       /*function getResultadoAjax()
